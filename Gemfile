@@ -37,14 +37,15 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'launchy'  
+  gem 'launchy'
   gem 'valid_attribute'
   gem 'shoulda'
   gem 'factory_girl_rails'
   gem 'pry-rails'
   gem 'dotenv-rails'
+  gem 'devise'
 end
- 
+
 group :development do
   gem 'quiet_assets'
   gem 'better_errors'
