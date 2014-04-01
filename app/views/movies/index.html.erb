@@ -1,0 +1,18 @@
+<h1>Movies</h1>
+
+<% @movies.each do |movie| %>
+  <p><strong><%= movie.title %></strong></p>
+  <p><strong><%= movie.year %></strong></p>
+  <p><strong>Hero: </strong> <%= movie.superhero %></p>
+  <% if !movie.mpaa_rating == "" %>
+    <p><strong>MPAA Rating: </strong><%= movie.mpaa_rating %></p>
+  <% end %>
+  <% if !movie.synopsis == "" %>
+    <p><strong>Synopsis: </strong><%= movie.synopsis %></p>
+  <% end %>
+  <% if !movie.director == "" %>
+    <p><strong>Director: </strong><%= movie.director %></p>
+  <% end %>
+  <p></p>
+
+<% end %>
