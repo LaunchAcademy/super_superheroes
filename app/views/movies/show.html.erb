@@ -1,0 +1,13 @@
+<h1><%= @movie.title %></h1>
+
+<p><%= @movie.year %></p>
+<p><strong>Hero: </strong> <%= @movie.superhero %></p>
+<% if !@movie.mpaa_rating == "" %>
+  <p><strong>MPAA Rating: </strong><%= @movie.mpaa_rating %></p>
+<% end %>
+<% if !@movie.synopsis == "" %>
+  <p><strong>Synopsis: </strong><%= @movie.synopsis %></p>
+<% end %>
+<% if !@movie.director == "" %>
+  <p><strong>Director: </strong><%= @movie.director %></p>
+<% end %>
