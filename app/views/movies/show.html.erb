@@ -19,6 +19,7 @@
 <% @movie.reviews.each do |r| %>
   <div id="<%= r.id %>">
     <%= link_to 'Edit', edit_movie_review_path(id: r.id, movie_id: @movie.id) %>
+    <%= button_to "Delete", { action: "destroy", controller: "reviews", id: r.id, movie_id: @movie.id }, method: :delete, data: { confirm: "Are you sure?" } %>
     <p>Rating: <%= r.rating %></p>
     <p><%= r.body %></p>
   </div>

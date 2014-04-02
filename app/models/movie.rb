@@ -9,7 +9,11 @@ class Movie < ActiveRecord::Base
 
   def average_rating
     ratings = []
-    reviews.each {|r| ratings << r.rating}
-    (ratings.reduce(:+)/1.0/ratings.length).round(2)
+    if reviews.count > 0
+      reviews.each {|r| ratings << r.rating}
+      (ratings.reduce(:+)/1.0/ratings.length).round(2)
+    else
+      0
+    end
   end
 end
