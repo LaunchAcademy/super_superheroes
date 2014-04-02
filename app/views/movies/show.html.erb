@@ -11,6 +11,7 @@
 <% if @movie.director != "" %>
   <p><strong>Director: </strong><%= @movie.director %></p>
 <% end %>
+<p><strong>Average Rating</strong><%= @movie.average_rating %></p>
 <p>
   <%= link_to 'Add Review', "/movies/#{@movie.id}/reviews/new" %>
 </p>
