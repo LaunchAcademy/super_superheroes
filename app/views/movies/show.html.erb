@@ -17,7 +17,9 @@
 </p>
 
 <% @movie.reviews.each do |r| %>
-  <p>Rating: <%= r.rating %></p>
-  <p><%= r.body %></p>
-  <p></p>
+  <div id="<%= r.id %>">
+    <%= link_to 'Edit', edit_movie_review_path(id: r.id, movie_id: @movie.id) %>
+    <p>Rating: <%= r.rating %></p>
+    <p><%= r.body %></p>
+  </div>
 <% end %>

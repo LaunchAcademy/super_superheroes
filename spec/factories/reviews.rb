@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :review do
-    rating 1
+    rating Kernel::rand(5)
     body "Would recommend to a friend, but not to a friend with good taste."
 
     movie

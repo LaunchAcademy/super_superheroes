@@ -2,7 +2,7 @@ class ReviewsController < ApplicationController
 
   def index
     @movie = Movie.find(params[:movie_id])
-    redirect_to movie_reviews_path(@movie)
+    redirect_to movie_path(@movie)
   end
 
   def new
@@ -19,6 +19,23 @@ class ReviewsController < ApplicationController
     else
       flash[:notice] = 'Review could not be saved.'
       render :new
+    end
+  end
+
+  def edit
+    @movie = Movie.find(params[:movie_id])
+    @review = Review.find(params[:id])
+  end
+
+  def update
+    @movie = Movie.find(params[:movie_id])
+    @review = Review.find(params[:id])
+    if @review.update(review_params)
+      flash[:notice] = 'Success! Your review was saved.'
+      redirect_to movie_path(@movie)
+    else
+      flash[:notice] = 'Review could not be saved.'
+      render :edit
     end
   end
 
