@@ -2,12 +2,25 @@
 
 <p><%= @movie.year %></p>
 <p><strong>Hero: </strong> <%= @movie.superhero %></p>
-<% if !@movie.mpaa_rating == "" %>
+<% if @movie.mpaa_rating != "" %>
   <p><strong>MPAA Rating: </strong><%= @movie.mpaa_rating %></p>
 <% end %>
-<% if !@movie.synopsis == "" %>
+<% if @movie.synopsis != "" %>
   <p><strong>Synopsis: </strong><%= @movie.synopsis %></p>
 <% end %>
-<% if !@movie.director == "" %>
+<% if @movie.director != "" %>
   <p><strong>Director: </strong><%= @movie.director %></p>
+<% end %>
+<p><strong>Average Rating</strong><%= @movie.average_rating %></p>
+<p>
+  <%= link_to 'Add Review', "/movies/#{@movie.id}/reviews/new" %>
+</p>
+
+<% @movie.reviews.each do |r| %>
+  <div id="<%= r.id %>">
+    <%= link_to 'Edit', edit_movie_review_path(id: r.id, movie_id: @movie.id) %>
+    <%= button_to "Delete", { action: "destroy", controller: "reviews", id: r.id, movie_id: @movie.id }, method: :delete, data: { confirm: "Are you sure?" } %>
+    <p>Rating: <%= r.rating %></p>
+    <p><%= r.body %></p>
+  </div>
 <% end %>

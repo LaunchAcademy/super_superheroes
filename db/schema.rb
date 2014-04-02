@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140402023610) do
+ActiveRecord::Schema.define(version: 20140402160456) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "movies", force: true do |t|
     t.string   "title",       null: false
     t.string   "year",        null: false
@@ -24,6 +28,14 @@ ActiveRecord::Schema.define(version: 20140402023610) do
   end
 
   add_index "movies", ["title", "year"], name: "index_movies_on_title_and_year", unique: true, using: :btree
+
+  create_table "reviews", force: true do |t|
+    t.integer  "movie_id",   null: false
+    t.integer  "rating",     null: false
+    t.text     "body",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
