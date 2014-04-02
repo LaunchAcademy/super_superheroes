@@ -45,7 +45,7 @@ feature 'user registers for a new account', %q{
     within(:css, "#user_username + .error") do #looking for the next thing
       expect(page).to have_content("can't be blank")
     end
-    
+
     within(:css, "#user_email + .error") do
       expect(page).to have_content("can't be blank")
     end
@@ -57,7 +57,7 @@ feature 'user registers for a new account', %q{
 
   scenario 'enters username that is already in use' do
     user_one = FactoryGirl.create(:user)
-    user_two = FactoryGirl.build(:user)
+    user_two = FactoryGirl.build(:user, username: user_one.username)
     visit new_user_registration_path
     fill_in 'Username', with: user_two.username
     fill_in 'Email', with: user_two.email
@@ -67,7 +67,6 @@ feature 'user registers for a new account', %q{
     within('form') do
       click_on 'Sign up'
     end
-
     within(:css, '#user_username + .error') do
       expect(page).to have_content "has already been taken"
     end
@@ -86,7 +85,7 @@ feature 'user registers for a new account', %q{
     end
 
     within(:css, '#user_password_confirmation + .error') do
-      expect(page).to have_content('doesn\'t match Password')
+      expect(page).to have_content("doesn't match Password")
     end
   end
 
@@ -106,10 +105,10 @@ feature 'user registers for a new account', %q{
       expect(page).to have_content('is invalid')
     end
   end
-  
+
   scenario 'Email is not unique' do
-    user_one = FactoryGirl.create(:user, email: 'john.doe@email.com')
-    user_two = FactoryGirl.build(:user, email: 'john.doe@email.com')
+    user_one = FactoryGirl.create(:user)
+    user_two = FactoryGirl.build(:user, email: user_one.email)
     visit new_user_registration_path
     fill_in 'Username', with: user_two.username
     fill_in 'Email', with: user_two.email

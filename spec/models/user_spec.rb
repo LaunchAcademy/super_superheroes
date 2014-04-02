@@ -7,4 +7,6 @@ describe User do
 
   it {should validate_uniqueness_of(:username)}
 
+  it {should have_valid(:email).when('john.doe@igoogle.com', '123johndoe@igoogle.com')}
+  it {should_not have_valid(:email).when('', nil, 'john', 'john@igoogle', 'usercom')}
 end
