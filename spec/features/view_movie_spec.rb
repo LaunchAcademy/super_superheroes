@@ -3,8 +3,8 @@ require 'spec_helper'
 feature 'view the page for a single movie', %Q{
 
   As a user
-  I want to see all the movies
-  So I can write a review for a movie
+  I want to see the page for a movie
+  So I can write a review for that movie
 
 } do
 

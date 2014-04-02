@@ -2,12 +2,21 @@
 
 <p><%= @movie.year %></p>
 <p><strong>Hero: </strong> <%= @movie.superhero %></p>
-<% if !@movie.mpaa_rating == "" %>
+<% if @movie.mpaa_rating != "" %>
   <p><strong>MPAA Rating: </strong><%= @movie.mpaa_rating %></p>
 <% end %>
-<% if !@movie.synopsis == "" %>
+<% if @movie.synopsis != "" %>
   <p><strong>Synopsis: </strong><%= @movie.synopsis %></p>
 <% end %>
-<% if !@movie.director == "" %>
+<% if @movie.director != "" %>
   <p><strong>Director: </strong><%= @movie.director %></p>
+<% end %>
+<p>
+  <%= link_to 'Add Review', "/movies/#{@movie.id}/reviews/new" %>
+</p>
+
+<% @movie.reviews.each do |r| %>
+  <p>Rating: <%= r.rating %></p>
+  <p><%= r.body %></p>
+  <p></p>
 <% end %>
