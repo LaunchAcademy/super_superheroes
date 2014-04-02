@@ -1,0 +1,10 @@
+<%= simple_form_for @movie do |f| %>
+  <%= f.input :title, required: true %>
+  <%= f.input :year, required: true %>
+  <%= f.input :superhero, required: true %>
+  <%= f.input :mpaa_rating, label: 'MPAA rating' %>
+  <%= f.input :director %>
+  <%= f.input :synopsis %>
+
+  <%= f.button :submit, 'Add Movie' %>
+<% end %>
