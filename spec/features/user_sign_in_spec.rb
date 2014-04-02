@@ -19,7 +19,7 @@ feature 'user sign in to his acccount', %q{
   scenario 'sign in successfully' do
     fill_in 'Email', with: @user.email
     fill_in 'user_password', with: @user.password
-    save_and_open_page
+
     within(:css, '.form-actions') do
       click_on 'Sign in'
     end
