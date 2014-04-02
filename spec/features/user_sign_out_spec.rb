@@ -11,7 +11,7 @@ feature 'user signs out', %q{
   # * Link is not accessbile to unauthorized users
 
   scenario 'user signs out successfully' do
-    sign_in(FactoryGirl.create(:user))
+    sign_in_as(FactoryGirl.create(:user))
 
     click_link 'Sign out'
 
@@ -19,10 +19,12 @@ feature 'user signs out', %q{
     expect(page).to have_content('Sign in')
     expect(page).to_not have_content('Sign out')
     expect(page).to have_content('Signed out successfully.')
-
-    expect(current_user).to be_false
   end
 
-  scenario 'link is not present when not logged in'
+  scenario 'link is not present when not logged in' do
+    visit root_path
+
+    expect(page).to_not have_content('Sign Out')
+  end
 
 end
