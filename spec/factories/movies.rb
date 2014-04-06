@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :movie do
     sequence(:title){|n| "Batman #{n}" }
-    sequence(:year){|n| "200#{n}"}
+    year "2000"
     superhero "Batman"
     mpaa_rating "PG-13"
     synopsis "Not the one with Heath Ledger"

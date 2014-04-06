@@ -8,9 +8,8 @@ class Movie < ActiveRecord::Base
   has_many :reviews
 
   def average_rating
-    ratings = []
     if reviews.count > 0
-      reviews.each {|r| ratings << r.rating}
+      ratings = reviews.pluck(:rating)
       (ratings.reduce(:+)/1.0/ratings.length).round(2)
     else
       0

@@ -11,7 +11,7 @@ feature 'view the page for a single movie', %Q{
   let!(:movie) { FactoryGirl.create(:movie) }
 
   scenario 'visiting a movie page' do
-    FactoryGirl.create_list(:review, 3, movie_id: movie.id, rating: rand(5))
+    FactoryGirl.create_list(:review, 3, movie: movie, rating: rand(5))
 
     visit movie_path(movie)
 

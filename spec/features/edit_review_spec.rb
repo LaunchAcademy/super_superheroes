@@ -17,14 +17,14 @@ So that I can correct my mistakes
   let(:review_count) {Review.count}
 
   before :each do
-    visit movie_path(review.movie.id)
+    visit movie_path(review.movie)
     within(:css, "##{review.id}") do
       click_link 'Edit'
     end
   end
 
   scenario 'user updates a review with valid attributes' do
-    new_rev = FactoryGirl.build(:review, body: 'Meh', movie_id: review.movie.id)
+    new_rev = FactoryGirl.build(:review, body: 'Meh', movie: review.movie)
     select(new_rev.rating, from: 'Rating')
     fill_in 'Review', with: new_rev.body
     click_on 'Finish Review'

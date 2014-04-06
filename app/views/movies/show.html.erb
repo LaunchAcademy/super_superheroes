@@ -1,17 +1,17 @@
 <h1><%= @movie.title %></h1>
 
 <p><%= @movie.year %></p>
-<p><strong>Hero: </strong> <%= @movie.superhero %></p>
+<p>Hero: <%= @movie.superhero %></p>
 <% if @movie.mpaa_rating != "" %>
-  <p><strong>MPAA Rating: </strong><%= @movie.mpaa_rating %></p>
+  <p>MPAA Rating: <%= @movie.mpaa_rating %></p>
 <% end %>
 <% if @movie.synopsis != "" %>
-  <p><strong>Synopsis: </strong><%= @movie.synopsis %></p>
+  <p>Synopsis: <%= @movie.synopsis %></p>
 <% end %>
 <% if @movie.director != "" %>
-  <p><strong>Director: </strong><%= @movie.director %></p>
+  <p>Director: <%= @movie.director %></p>
 <% end %>
-<p><strong>Average Rating</strong><%= @movie.average_rating %></p>
+<p>Average Rating<%= @movie.average_rating %></p>
 <p>
   <%= link_to 'Add Review', "/movies/#{@movie.id}/reviews/new" %>
 </p>
