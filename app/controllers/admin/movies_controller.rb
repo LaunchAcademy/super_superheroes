@@ -1,5 +1,7 @@
 module Admin
   class MoviesController < ApplicationController
+    before_action :admin?
+
     def index
       @movies = Movie.all
     end
