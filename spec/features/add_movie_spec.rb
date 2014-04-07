@@ -19,7 +19,8 @@ So that everyone can review it
 # * if title and year combination is NOT unique, I receive an error message
 
   scenario 'user adds movie with valid attributes' do
-    sign_in_as(FactoryGirl.create(:user))
+    user = FactoryGirl.create(:user)
+    sign_in_as(user)
     visit new_movie_path
 
     prev_count = Movie.count
@@ -32,6 +33,7 @@ So that everyone can review it
     fill_in 'Synopsis', with: movie.synopsis
     click_on 'Add Movie'
 
+    expect(Movie.last.user).to eq(user)
     expect(page).to have_content 'Success!'
     expect(Movie.count).to eq(prev_count + 1)
   end
@@ -78,7 +80,8 @@ So that everyone can review it
   end
 
   scenario 'user adds movie with same title as existing movie' do
-    sign_in_as(FactoryGirl.create(:user))
+    user = FactoryGirl.create(:user)
+    sign_in_as(user)
     visit new_movie_path
 
     movie = FactoryGirl.create(:movie)
@@ -89,6 +92,7 @@ So that everyone can review it
 
     click_on 'Add Movie'
 
+    expect(Movie.last.user).to eq(user)
     expect(page).to have_content 'Success!'
     expect(page).to have_content movie.title
   end
