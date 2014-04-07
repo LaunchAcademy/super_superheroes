@@ -11,6 +11,9 @@ describe Movie do
   it { should have_valid(:mpaa_rating).when("", nil, "R")}
   it { should_not have_valid(:mpaa_rating).when("peegee")}
 
+  it { should belong_to :user }
+  it { should have_many :reviews }
+
   describe "#average_rating" do
     it "returns a movie's average rating" do
       movie = FactoryGirl.create(:movie)

@@ -6,5 +6,6 @@ FactoryGirl.define do
     body "Would recommend to a friend, but not to a friend with good taste."
 
     movie
+    user
   end
 end
