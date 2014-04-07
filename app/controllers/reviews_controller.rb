@@ -1,5 +1,7 @@
 class ReviewsController < ApplicationController
 
+  before_action :authenticate_user!, only: [:new, :create]
+
   def index
     @movie = Movie.find(params[:movie_id])
     redirect_to movie_path(@movie)
@@ -12,7 +14,7 @@ class ReviewsController < ApplicationController
 
   def create
     @movie = Movie.find(params[:movie_id])
-    @review = @movie.reviews.new(review_params)
+    @review = @movie.reviews.new(review_params.merge(user: current_user))
     if @review.save
       flash[:notice] = 'Success! Your review was saved.'
       redirect_to movie_path(@movie)
