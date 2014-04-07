@@ -5,7 +5,11 @@ class MoviesController < ApplicationController
   end
 
   def new
-    @movie = Movie.new
+    if user_signed_in?
+      @movie = Movie.new
+    else
+      redirect_to new_user_session_path, alert: 'You need to be signed in to add a movie.'
+    end
   end
 
   def create
