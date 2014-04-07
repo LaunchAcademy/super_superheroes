@@ -1,0 +1,5 @@
+<%= simple_form_for [@movie, @review] do |f| %>
+  <%= f.input :rating, collection: 0..5, required: true %>
+  <%= f.input :body, label: 'Review' %>
+  <%= f.button :submit, 'Finish Review' %>
+<% end %>

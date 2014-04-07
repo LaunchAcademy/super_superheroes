@@ -10,4 +10,15 @@ describe Movie do
 
   it { should have_valid(:mpaa_rating).when("", nil, "R")}
   it { should_not have_valid(:mpaa_rating).when("peegee")}
+
+  describe "#average_rating" do
+    it "returns a movie's average rating" do
+      movie = FactoryGirl.create(:movie)
+      [1, 2, 4].each {|x| FactoryGirl.create(:review, movie_id: movie.id, rating: x) }
+      expect(movie.average_rating).to eq(2.33)
+
+      new_movie = FactoryGirl.create(:movie)
+      expect(new_movie.average_rating).to eq(0)
+    end
+  end
 end
