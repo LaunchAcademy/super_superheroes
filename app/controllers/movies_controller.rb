@@ -1,15 +1,13 @@
 class MoviesController < ApplicationController
 
+  before_action :authenticate_user!, only: [:new, :create]
+
   def index
     @movies = Movie.all
   end
 
   def new
-    if user_signed_in?
-      @movie = Movie.new
-    else
-      redirect_to new_user_session_path, alert: 'You need to be signed in to add a movie.'
-    end
+    @movie = Movie.new
   end
 
   def create

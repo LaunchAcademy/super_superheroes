@@ -7,4 +7,5 @@ describe Review do
   it { should_not have_valid(:rating).when(nil, "three", "")}
   it { should have_valid(:body).when(review.body, nil, "")}
   it { should belong_to(:movie)}
+  it { should belong_to(:user) }
 end
