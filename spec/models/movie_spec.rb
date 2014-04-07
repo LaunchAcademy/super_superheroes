@@ -14,7 +14,7 @@ describe Movie do
   describe "#average_rating" do
     it "returns a movie's average rating" do
       movie = FactoryGirl.create(:movie)
-      [1, 2, 4].each {|x| FactoryGirl.create(:review, movie_id: movie.id, rating: x) }
+      [1, 2, 4].each {|x| FactoryGirl.create(:review, movie: movie, rating: x) }
       expect(movie.average_rating).to eq(2.33)
 
       new_movie = FactoryGirl.create(:movie)
