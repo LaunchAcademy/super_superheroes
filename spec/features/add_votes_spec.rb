@@ -23,10 +23,9 @@ feature 'user votes on a review', %Q{
 
     scenario 'User votes on review' do
       click_on 'Up'
+
       expect(@review.votes.count).to eq(1)
-      within(:css, 'span#up_count') do
-        expect(page).to have_content('1')
-      end
+      expect(page).to have_content('1')
       expect(page).to have_content @movie.title
       expect(page).to have_content "Success!"
     end
@@ -36,12 +35,10 @@ feature 'user votes on a review', %Q{
       click_on 'Down'
       expect(@review.votes.count).to eq(1)
       expect(Vote.find_by(user: @user, review: @review).value).to eq('Down')
-      within(:css, 'span#down_count') do
-        expect(page).to have_content('1')
-      end
-      within(:css, 'span#up_count') do
-        expect(page).to have_content('0')
-      end
+
+      expect(page).to have_content('Success!')
+      expect(page).to have_content('1')
+      expect(page).to have_content('0')
     end
   end
 
@@ -51,7 +48,7 @@ feature 'user votes on a review', %Q{
     visit movie_path(@movie)
     expect(page).to_not have_button 'Down'
     expect(page).to_not have_button 'Up'
-    expect(page).to have_content 'Up 0'
+    expect(page).to have_content 'Up: 0'
   end
 
 end

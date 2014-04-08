@@ -3,19 +3,24 @@ class VotesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    prior_vote = Vote.find_by(user: current_user, review: Review.find(params[:review_id]))
-
-    if prior_vote
-      prior_vote.destroy
-    end
-
     @vote = Vote.new(vote_params)
     if @vote.save
       flash[:notice] = "Success! You voted."
     else
       flash[:notice] = "Your vote could not be saved."
     end
-    redirect_to movie_path(Movie.find_by(params[:id]))
+    redirect_to movie_path(@vote.review.movie)
+  end
+
+  def update
+    @review = Review.find(params[:review_id])
+    @vote = Vote.find_by(review: @review, user: current_user)
+    if @vote.update(vote_params)
+      flash[:notice] = "Success! You changed your vote."
+    else
+      flash[:notice] = "Your vote could not be saved."
+    end
+    redirect_to movie_path(@review.movie)
   end
 
   private
