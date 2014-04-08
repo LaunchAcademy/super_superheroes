@@ -16,7 +16,7 @@
   <%= link_to 'Add Review', "/movies/#{@movie.id}/reviews/new" %>
 </p>
 
-<% @movie.reviews.each do |r| %>
+<% @reviews.each do |r| %>
 
   <div id="<%= r.id %>">
 
