@@ -16,13 +16,19 @@ class Review < ActiveRecord::Base
     @net_votes ||= calculate_votes
   end
 
+  def up_votes_count
+    votes.where(value: "Up").count
+  end
+
+  def down_votes_count
+    votes.where(value: "Down").count
+  end
+
   def calculate_votes
     if self.votes.count == 0
       0
     else
-      up_votes = self.votes.where(value: "Up").count
-      down_votes = self.votes.where(value: "Down").count
-      up_votes - down_votes
+      up_votes_count - down_votes_count
     end
   end
 

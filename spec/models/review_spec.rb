@@ -30,4 +30,21 @@ describe Review do
     end
   end
 
+  describe "vote counting methods" do
+
+    before :each do
+      @review = FactoryGirl.create(:review)
+      FactoryGirl.create_list(:vote, 2, review: @review, value: "Up")
+      FactoryGirl.create_list(:vote, 3, review: @review, value: "Down")
+    end
+
+    it 'returns the number of upvotes the review has' do
+      expect(@review.up_votes_count).to eq(2)
+    end
+
+    it 'returns the number of downvotes the review has' do
+      expect(@review.down_votes_count).to eq(3)
+    end
+  end
+
 end

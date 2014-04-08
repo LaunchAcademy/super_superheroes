@@ -58,8 +58,8 @@
 
       <% else %>
 
-        <p>Up: <%= r.votes.where(value: "Up").count %>
-          Down: <%= r.votes.where(value: "Down").count %>
+        <p>Up: <%= r.up_votes_count %>
+          Down: <%= r.down_votes_count %>
         </p>
 
       <% end %>
