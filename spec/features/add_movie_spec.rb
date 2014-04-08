@@ -100,7 +100,7 @@ So that everyone can review it
   scenario 'unathorized user cannot add movies' do
     visit new_movie_path
 
-    expect(page).to have_content('You need to be signed in to add a movie.')
+    expect(page).to have_content("You need to sign in or sign up before continuing.")
     expect(current_path).to eq(new_user_session_path)
   end
 end

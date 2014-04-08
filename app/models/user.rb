@@ -5,6 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :username, presence: true, uniqueness: true
-  has_many :movies
-  has_many :reviews
+  has_many :movies, dependent: :nullify
+  has_many :reviews, dependent: :nullify
 end

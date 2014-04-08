@@ -14,7 +14,7 @@ class ReviewsController < ApplicationController
 
   def create
     @movie = Movie.find(params[:movie_id])
-    @review = @movie.reviews.new(review_params.merge(user: current_user))
+    @review = @movie.reviews.new(review_params)
     if @review.save
       flash[:notice] = 'Success! Your review was saved.'
       redirect_to movie_path(@movie)
@@ -57,6 +57,6 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:rating, :body)
+    params.require(:review).permit(:rating, :body).merge(user: current_user)
   end
 end

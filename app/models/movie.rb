@@ -6,7 +6,7 @@ class Movie < ActiveRecord::Base
 
   validates :mpaa_rating, inclusion: {in: ["G", "PG", "PG-13", "R", "NC-17", "", nil]}
 
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   belongs_to :user
 
   def average_rating
