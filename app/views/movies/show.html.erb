@@ -17,17 +17,34 @@
 </p>
 
 <% @movie.reviews.each do |r| %>
+
   <div id="<%= r.id %>">
+
     <%= link_to 'Edit', edit_movie_review_path(id: r.id, movie_id: @movie.id) %>
-    <%= button_to "Delete", { action: "destroy", controller: "reviews", id: r.id, movie_id: @movie.id }, method: :delete, data: { confirm: "Are you sure?" } %>
+
+      <%= button_to "Delete", { action: "destroy", controller: "reviews", id: r.id, movie_id: @movie.id }, method: :delete, data: { confirm: "Are you sure?" } %>
+
     <p>Rating: <%= r.rating %></p>
+
     <p><%= r.body %></p>
-    <p class='votes'><%= button_to 'Up', {action: "create",
+
+    <div class='votes'>
+
+    <% if user_signed_in? && r.votes.where(user: current_user, value: "Up").empty? %>
+      <%= button_to 'Up', {action: "create",
       controller: "votes", review_id: r.id, user_id: current_user.id, value: "Up"}, method: :post %>
+    <% else %>
+      Up
+    <% end %>
       <span id='up_count'><%= r.votes.where(value: 'Up').count %></span>
+
+    <% if user_signed_in? && r.votes.where(user: current_user, value: "Down").empty? %>
       <%= button_to 'Down', {action: "create",
       controller: "votes", review_id: r.id, user_id: current_user.id, value: "Down"}, method: :post %>
+      <% else %>
+        Down
+      <% end %>
       <span id='down_count'><%= r.votes.where(value: 'Down').count %></span>
-    </p>
+    </div>
   </div>
 <% end %>

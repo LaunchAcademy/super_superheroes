@@ -14,10 +14,10 @@ feature 'user votes on a review', %Q{
 
   context 'User signed in' do
     before :each do
-      user = FactoryGirl.create(:user)
+      @user = FactoryGirl.create(:user)
       @movie = FactoryGirl.create(:movie)
       @review = FactoryGirl.create(:review, movie: @movie)
-      sign_in_as(user)
+      sign_in_as(@user)
       visit movie_path(@movie)
     end
 
@@ -31,8 +31,27 @@ feature 'user votes on a review', %Q{
       expect(page).to have_content "Success!"
     end
 
-    scenario 'User changes their vote'
+    scenario 'User changes their vote' do
+      click_on 'Up'
+      click_on 'Down'
+      expect(@review.votes.count).to eq(1)
+      expect(Vote.find_by(user: @user, review: @review).value).to eq('Down')
+      within(:css, 'span#down_count') do
+        expect(page).to have_content('1')
+      end
+      within(:css, 'span#up_count') do
+        expect(page).to have_content('0')
+      end
+    end
   end
-  scenario 'Unauthorized user tries to vote'
+
+  scenario 'Unauthorized user tries to vote' do
+    @movie = FactoryGirl.create(:movie)
+    @review = FactoryGirl.create(:review, movie: @movie)
+    visit movie_path(@movie)
+    expect(page).to_not have_button 'Down'
+    expect(page).to_not have_button 'Up'
+    expect(page).to have_content 'Up 0'
+  end
 
 end
