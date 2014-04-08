@@ -5,6 +5,7 @@ class Review < ActiveRecord::Base
     inclusion: { in: (0..5) }
 
   belongs_to :movie
+  has_many :votes
 
   validates :movie, presence: true
 end
