@@ -1,6 +1,6 @@
 <h1>Movies</h1>
 
-<table>
+<table border="1">
   <thead>
     <th>Title</th>
     <th>Year</th>
@@ -8,11 +8,14 @@
     <th>MPAA Rating</th>
     <th>Director</th>
     <th>Synopsis</th>
+    <% if admin? %>
+      <th>Delete</th>
+    <% end %>
   </thead>
 
   <tbody>
     <% @movies.each do |movie| %>
-      <tr>
+      <tr id=<%= "movie_#{movie.id}" %>>
         <td>
           <%= movie.title %>
         </td>
@@ -31,6 +34,11 @@
         <td>
           <%= movie.synopsis %>
         </td>
+        <% if admin? %>
+          <td>
+            <%= link_to 'Delete', movie_path(movie), method: :delete %>
+          </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
 
-  before_action :check_auth, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create]
 
   def index
     @movies = Movie.all
@@ -23,6 +23,17 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
+  end
+
+  def destroy
+    @movie = Movie.find(params[:id])
+    if @movie.destroy
+      flash[:notice] = "Movie successfully Deleted"
+    else
+      flash[:alert] = "Movie could not be Deleted"
+    end
+
+    redirect_to movies_path
   end
 
   private

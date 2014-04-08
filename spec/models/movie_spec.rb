@@ -24,4 +24,5 @@ describe Movie do
       expect(new_movie.average_rating).to eq(0)
     end
   end
+
 end

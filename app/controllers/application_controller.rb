@@ -11,9 +11,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) << :username
   end
 
-  def check_auth
-    if !user_signed_in?
-      redirect_to new_user_session_path, alert: "You need to sign in or sign up before continuing."
-    end
+  def admin?
+    true if current_user.role == 'admin'
   end
+
 end
