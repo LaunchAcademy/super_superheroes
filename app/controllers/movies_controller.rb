@@ -1,5 +1,6 @@
 class MoviesController < ApplicationController
 
+  before_action :authenticate_user!, only: [:new, :create]
 
   def index
     @movies = Movie.all
@@ -10,7 +11,7 @@ class MoviesController < ApplicationController
   end
 
   def create
-    @movie = Movie.new(movie_params)
+    @movie = Movie.new(movie_params.merge(user: current_user))
     if @movie.save
       flash[:notice] = 'Success! Your movie was saved.'
       redirect_to movie_path(@movie)

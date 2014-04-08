@@ -8,5 +8,7 @@ FactoryGirl.define do
     mpaa_rating "PG-13"
     synopsis "Not the one with Heath Ledger"
     director "Terrence Malick"
+
+    user
   end
 end
