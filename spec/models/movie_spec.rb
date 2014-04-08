@@ -11,6 +11,9 @@ describe Movie do
   it { should have_valid(:mpaa_rating).when("", nil, "R")}
   it { should_not have_valid(:mpaa_rating).when("peegee")}
 
+  it { should belong_to :user }
+  it { should have_many(:reviews).dependent(:destroy) }
+
   describe "#average_rating" do
     it "returns a movie's average rating" do
       movie = FactoryGirl.create(:movie)
@@ -19,17 +22,6 @@ describe Movie do
 
       new_movie = FactoryGirl.create(:movie)
       expect(new_movie.average_rating).to eq(0)
-    end
-  end
-
-  describe 'Admin actions' do
-    it 'deletes reviews when movie is deleted' do
-      movies = FactoryGirl.create_list(:movie, 2)
-      FactoryGirl.create_list(:review, 3, movie: movies[0])
-      FactoryGirl.create_list(:review, 3, movie: movies[1])
-      movies[0].destroy
-
-      expect(Review.count).to eq(3)
     end
   end
 

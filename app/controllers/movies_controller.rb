@@ -1,5 +1,6 @@
 class MoviesController < ApplicationController
 
+  before_action :authenticate_user!, only: [:new, :create]
 
   def index
     @movies = Movie.all
@@ -38,6 +39,6 @@ class MoviesController < ApplicationController
   private
 
   def movie_params
-    params.require(:movie).permit(:title, :year, :superhero, :mpaa_rating, :synopsis, :director)
+    params.require(:movie).permit(:title, :year, :superhero, :mpaa_rating, :synopsis, :director).merge(user: current_user)
   end
 end
