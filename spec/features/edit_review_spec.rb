@@ -19,7 +19,7 @@ So that I can correct my mistakes
   before :each do
     sign_in_as(FactoryGirl.create(:user))
     visit movie_path(review.movie)
-    within(:css, "##{review.id}") do
+    within(:css, "#review_#{review.id}") do
       click_link 'Edit'
     end
   end

@@ -51,7 +51,7 @@ class ReviewsController < ApplicationController
       flash[:notice] = 'Review could not be deleted.'
     end
 
-      redirect_to movie_path(@movie)
+    redirect_to movie_path(@movie)
   end
 
   private

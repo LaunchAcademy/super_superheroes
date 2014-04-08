@@ -13,20 +13,46 @@ So it’s no longer available
 # * I must be signed in to delete a review
 # * I can only delete reviews I wrote
 
-  let!(:review) {FactoryGirl.create(:review)}
-  let!(:movie) {review.movie}
+  let!(:movie) { FactoryGirl.create(:movie) }
+  let!(:user) { FactoryGirl.create(:user) }
+  let!(:reviews) do
+    FactoryGirl.create_list(:review, 3, movie: movie)
+    FactoryGirl.create_list(:review, 2, movie: movie, user: user)
+  end
 
-  scenario 'user destroys a review' do
-    visit movie_path(movie.id)
+  scenario 'signed in user destroys a review' do
+    sign_in_as(user)
+    visit movie_path(movie)
 
-    within(:css, "##{review.id}") do
+    within(:css, "#review_#{reviews[0].id}") do
       click_on 'Delete'
     end
 
-    expect(page).to_not have_css "##{review.id}"
+    within(:css, '.reviews') do
+      page.should have_button('Delete', count: 1)
+    end
+
     expect(page).to have_content 'Review successfully deleted.'
-    expect(Review.where(id: review.id)).to be_empty
+    expect(Review.where(id: reviews[0].id)).to be_empty
     expect(page).to have_content movie.title
+  end
+
+  scenario 'Standard user can only see delete links on their own reviews' do
+    sign_in_as(user)
+    visit movie_path(movie)
+
+    within(:css, '.reviews') do
+      page.should have_button('Delete', count: 2)
+    end
+
+  end
+
+  scenario 'Unauthorized cannot see any delete links' do
+    visit movie_path(movie)
+
+    within(:css, '.reviews') do
+      page.should have_button('Delete', count: 0)
+    end
   end
 
 end

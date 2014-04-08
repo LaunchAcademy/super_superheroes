@@ -13,9 +13,9 @@ feature 'Admin deletes review', %Q{
   # * When I delete a review, its votes are also deleted
 
 
-  let(:movie) { FactoryGirl.create(:movie) }
-  let(:user) { FactoryGirl.create(:user) }
-  let(:reviews) do
+  let!(:movie) { FactoryGirl.create(:movie) }
+  let!(:user) { FactoryGirl.create(:user) }
+  let!(:reviews) do
     FactoryGirl.create_list(:review, 3, movie: movie)
     FactoryGirl.create_list(:review, 2, movie: movie, user: user)
   end
@@ -34,12 +34,15 @@ feature 'Admin deletes review', %Q{
     end
 
     scenario 'Admin can delete a review' do
-      reviews
-      save_and_open_page
+      within(:css, "#review_#{reviews[0].id}") do
+        click_button 'Delete'
+      end
+
+      within(:css, '.reviews') do
+        page.should have_button('Delete', count: movie.reviews.count)
+      end
+
     end
   end
 
-  scenario 'Standard user can only see delete links on their own reviews'
-
-  scenario 'Unauthorized cannot see any delete links'
 end
