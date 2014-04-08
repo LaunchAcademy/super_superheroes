@@ -1,20 +1,27 @@
-<h1><%= @movie.title %></h1>
 
-<p><%= @movie.year %></p>
-<p>Hero: <%= @movie.superhero %></p>
-<% if @movie.mpaa_rating != "" %>
-  <p>MPAA Rating: <%= @movie.mpaa_rating %></p>
-<% end %>
-<% if @movie.synopsis != "" %>
-  <p>Synopsis: <%= @movie.synopsis %></p>
-<% end %>
-<% if @movie.director != "" %>
-  <p>Director: <%= @movie.director %></p>
-<% end %>
-<p>Average Rating<%= @movie.average_rating %></p>
-<p>
-  <%= link_to 'Add Review', "/movies/#{@movie.id}/reviews/new" %>
-</p>
+<div class="movie">
+  <h1><%= @movie.title %></h1>
+
+  <p><%= @movie.year %></p>
+  <p>Hero: <%= @movie.superhero %></p>
+  <% if @movie.mpaa_rating != "" %>
+    <p>MPAA Rating: <%= @movie.mpaa_rating %></p>
+  <% end %>
+  <% if @movie.synopsis != "" %>
+    <p>Synopsis: <%= @movie.synopsis %></p>
+  <% end %>
+  <% if @movie.director != "" %>
+    <p>Director: <%= @movie.director %></p>
+  <% end %>
+  <p>Average Rating<%= @movie.average_rating %></p>
+  <p>
+    <%= link_to 'Add Review', new_movie_review_path(@movie) %>
+    <% if admin? %>
+      <%= link_to 'Delete', movie_path(@movie), method: :delete %>
+    <% end %>
+  </p>
+</div>
+
 
 <% @movie.reviews.each do |r| %>
   <div id="<%= r.id %>">
