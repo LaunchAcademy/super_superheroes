@@ -22,15 +22,4 @@ describe Movie do
     end
   end
 
-  describe 'Admin actions' do
-    it 'deletes reviews when movie is deleted' do
-      movies = FactoryGirl.create_list(:movie, 2)
-      FactoryGirl.create_list(:review, 3, movie: movies[0])
-      FactoryGirl.create_list(:review, 3, movie: movies[1])
-      movies[0].destroy
-
-      expect(Review.count).to eq(3)
-    end
-  end
-
 end
