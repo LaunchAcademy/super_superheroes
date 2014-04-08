@@ -15,19 +15,20 @@ feature 'user votes on a review', %Q{
   context 'User signed in' do
     before :each do
       user = FactoryGirl.create(:user)
-      movie = FactoryGirl.create(:movie)
-      review = FactoryGirl.create(:review, movie: movie)
+      @movie = FactoryGirl.create(:movie)
+      @review = FactoryGirl.create(:review, movie: @movie)
       sign_in_as(user)
-      visit movie_path(movie)
+      visit movie_path(@movie)
     end
 
     scenario 'User votes on review' do
-      save_and_open_page
       click_on 'Up'
-      expect(review.votes.count).to eq(1)
+      expect(@review.votes.count).to eq(1)
       within(:css, 'span#up_count') do
         expect(page).to have_content('1')
       end
+      expect(page).to have_content @movie.title
+      expect(page).to have_content "Success!"
     end
 
     scenario 'User changes their vote'

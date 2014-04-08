@@ -11,7 +11,7 @@
 <% if @movie.director != "" %>
   <p>Director: <%= @movie.director %></p>
 <% end %>
-<p>Average Rating<%= @movie.average_rating %></p>
+<p>Average Rating: <%= @movie.average_rating %></p>
 <p>
   <%= link_to 'Add Review', "/movies/#{@movie.id}/reviews/new" %>
 </p>
@@ -22,12 +22,12 @@
     <%= button_to "Delete", { action: "destroy", controller: "reviews", id: r.id, movie_id: @movie.id }, method: :delete, data: { confirm: "Are you sure?" } %>
     <p>Rating: <%= r.rating %></p>
     <p><%= r.body %></p>
-    <p class='votes'><%= button_to 'Up',
-      create_vote_path(review_id: r.id, user_id: current_user.id, value: 'up') %>
-      <span id='up_count'><%= r.votes.where(value: 'up').count %></span>
-      <%= button_to 'Down',
-      create_vote_path(review_id: r.id, user_id: current_user.id, value: 'down') %>
-      <span id='down_count'><%= r.votes.where(value: 'down').count %></span>
+    <p class='votes'><%= button_to 'Up', {action: "create",
+      controller: "votes", review_id: r.id, user_id: current_user.id, value: "Up"}, method: :post %>
+      <span id='up_count'><%= r.votes.where(value: 'Up').count %></span>
+      <%= button_to 'Down', {action: "create",
+      controller: "votes", review_id: r.id, user_id: current_user.id, value: "Down"}, method: :post %>
+      <span id='down_count'><%= r.votes.where(value: 'Down').count %></span>
     </p>
   </div>
 <% end %>
