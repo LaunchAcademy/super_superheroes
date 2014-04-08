@@ -8,12 +8,7 @@ describe Review do
   it { should have_valid(:body).when(review.body, nil, "")}
 
   it { should belong_to(:movie)}
-<<<<<<< HEAD
   it {should validate_presence_of(:movie)}
 
   it {should belong_to(:user)}
-  it {should validate_presence_of(:user)}
-=======
-  it { should belong_to(:user) }
->>>>>>> master
 end
