@@ -4,10 +4,6 @@ SuperHeroes::Application.routes.draw do
     resources :reviews
   end
 
-  namespace :admin do
-    resources :movies, only: [:index, :show, :destroy]
-  end
-
   devise_for :users
   root to: "welcome#index"
 

@@ -18,7 +18,7 @@ feature 'admin deletes a movie', %Q{
       @review = FactoryGirl.create_list(:review, 3, movie: @movies.first)
       @prev_count = Movie.count
       sign_in_as(@admin)
-      visit admin_movies_path
+      visit movies_path
     end
 
     scenario 'Admin can see list of movies' do
@@ -28,6 +28,7 @@ feature 'admin deletes a movie', %Q{
     end
 
     scenario 'Admin delete movie' do
+
       within(:css, "#movie_#{@movies.first.id}") do
         click_link 'Delete'
       end
@@ -39,23 +40,13 @@ feature 'admin deletes a movie', %Q{
 
   end
 
-  context 'logged in as non-admin user' do
+  context 'logged in as non-admin user or unauthenticated user' do
     scenario 'visit movies page as non-admin' do
       user = FactoryGirl.create(:user)
       sign_in_as(user)
-      visit admin_movies_path
+      visit movies_path
 
-      expect(page).to have_content('Unauthorized access.')
-      expect(current_path).to eq(root_path)
-    end
-  end
-
-  context 'not logged in unauthorized user' do
-    scenario 'visit movies page as not-logged in user' do
-      visit admin_movies_path
-
-      expect(page).to have_content('Please sign in or sign up to continue.')
-      expect(current_path).to eq(new_user_session_path)
+      expect(page).to_not have_content('Delete')
     end
   end
 
