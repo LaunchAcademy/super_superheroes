@@ -6,7 +6,11 @@ describe Review do
   it { should have_valid(:rating).when(2, 3, 5)}
   it { should_not have_valid(:rating).when(nil, "three", "")}
   it { should have_valid(:body).when(review.body, nil, "")}
+
   it { should belong_to(:movie)}
+  it {should validate_presence_of(:movie)}
+
+  it {should belong_to(:user)}
 
   describe "#net_votes" do
 
@@ -25,4 +29,5 @@ describe Review do
       expect(Review.all.sort_by(&:net_votes).first).to eq(@review2)
     end
   end
+
 end

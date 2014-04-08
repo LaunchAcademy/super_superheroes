@@ -6,4 +6,6 @@ class User < ActiveRecord::Base
 
   has_many :votes
   validates :username, presence: true, uniqueness: true
+  has_many :movies, dependent: :nullify
+  has_many :reviews, dependent: :nullify
 end

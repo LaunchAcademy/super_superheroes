@@ -12,7 +12,7 @@ describe Movie do
   it { should_not have_valid(:mpaa_rating).when("peegee")}
 
   it { should belong_to :user }
-  it { should have_many :reviews }
+  it { should have_many(:reviews).dependent(:destroy) }
 
   describe "#average_rating" do
     it "returns a movie's average rating" do
@@ -24,4 +24,5 @@ describe Movie do
       expect(new_movie.average_rating).to eq(0)
     end
   end
+
 end

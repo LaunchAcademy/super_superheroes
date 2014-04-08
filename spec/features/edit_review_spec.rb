@@ -17,6 +17,7 @@ So that I can correct my mistakes
   let(:review_count) {Review.count}
 
   before :each do
+    sign_in_as(FactoryGirl.create(:user))
     visit movie_path(review.movie)
     within(:css, "##{review.id}") do
       click_link 'Edit'
