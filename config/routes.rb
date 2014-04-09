@@ -4,6 +4,8 @@ SuperHeroes::Application.routes.draw do
     resources :reviews
   end
 
+  resources :votes, only: [:update, :create]
+
   devise_for :users
   root to: "welcome#index"
 

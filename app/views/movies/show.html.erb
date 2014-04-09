@@ -11,16 +11,69 @@
 <% if @movie.director != "" %>
   <p>Director: <%= @movie.director %></p>
 <% end %>
-<p>Average Rating<%= @movie.average_rating %></p>
+<p>Average Rating: <%= @movie.average_rating %></p>
 <p>
   <%= link_to 'Add Review', "/movies/#{@movie.id}/reviews/new" %>
 </p>
 
-<% @movie.reviews.each do |r| %>
+<% @reviews.each do |r| %>
+
   <div id="<%= r.id %>">
-    <%= link_to 'Edit', edit_movie_review_path(id: r.id, movie_id: @movie.id) %>
-    <%= button_to "Delete", { action: "destroy", controller: "reviews", id: r.id, movie_id: @movie.id }, method: :delete, data: { confirm: "Are you sure?" } %>
+
+    <% if current_user == r.user %>
+
+      <%= link_to 'Edit', edit_movie_review_path(id: r.id, movie_id: @movie.id) %>
+
+      <%= button_to "Delete", { action: "destroy", controller: "reviews", id: r.id, movie_id: @movie.id }, method: :delete, data: { confirm: "Are you sure?" } %>
+
+    <% end %>
+
     <p>Rating: <%= r.rating %></p>
+
     <p><%= r.body %></p>
+
+    <div class='votes'>
+
+      <% if user_signed_in? %>
+
+        <% if user_vote_on(current_user, r) %>
+
+          <% if user_has_upvoted?(current_user, r) %>
+
+            Up: <%= r.up_votes_count %>
+
+            <%= button_to 'Down', {action: "update",
+              controller: "votes", review_id: r.id, user_id: current_user.id, value: "Down"}, method: :put %><%= r.down_votes_count %>
+
+          <% else %>
+
+            <%= button_to 'Up', {action: "update",
+              controller: "votes", review_id: r.id, user_id: current_user.id, value: "Up"}, method: :put %><%= r.up_votes_count %>
+              Down: <%= r.down_votes_count %>
+
+          <% end %>
+
+        <% elsif current_user %>
+
+          <%= button_to 'Up', {action: "create",
+              controller: "votes", review_id: r.id, user_id: current_user.id, value: "Up"}, method: :post %>
+              <%= r.up_votes_count %>
+
+          <%= button_to 'Down', {action: "create",
+              controller: "votes", review_id: r.id, user_id: current_user.id, value: "Down"}, method: :post %>
+              <%= r.down_votes_count %>
+
+        <% end %>
+
+      <% else %>
+
+        <p>Up: <%= r.up_votes_count %>
+          Down: <%= r.down_votes_count %>
+        </p>
+
+      <% end %>
+
+    </div>
+
   </div>
 <% end %>
