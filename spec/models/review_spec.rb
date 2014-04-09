@@ -11,6 +11,7 @@ describe Review do
   it { should validate_presence_of(:movie)}
 
   it {should belong_to(:user)}
+  it {should belong_to(:author)}
 
   it {should have_many(:votes).dependent(:destroy)}
 
