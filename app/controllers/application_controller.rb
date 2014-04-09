@@ -15,4 +15,12 @@ class ApplicationController < ActionController::Base
     true if current_user.role == 'admin'
   end
 
+  def validate_admin
+    if !user_signed_in?
+      redirect_to new_user_session_path, notice: 'Please sign in or sign up to continue.'
+    elsif current_user.role != 'admin'
+      redirect_to root_path, alert: 'Unauthorized access.'
+    end
+  end
+
 end
