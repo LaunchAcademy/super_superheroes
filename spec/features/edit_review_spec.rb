@@ -16,18 +16,11 @@ So that I can correct my mistakes
   let!(:review) {FactoryGirl.create(:review)}
   let(:review_count) {Review.count}
 
-<<<<<<< HEAD
-  before :each do
-    sign_in_as(FactoryGirl.create(:user))
-    visit movie_path(review.movie)
-    within(:css, "#review_#{review.id}") do
-      click_link 'Edit'
-=======
   context 'user edits their own review' do
     before :each do
       sign_in_as(review.user)
       visit movie_path(review.movie)
-      within(:css, "##{review.id}") do
+      within(:css, "#review_#{review.id}") do
         click_link 'Edit'
       end
     end
@@ -43,7 +36,6 @@ So that I can correct my mistakes
       expect(page).to have_content 'Success!'
       expect(Review.count).to eq(review_count)
       expect(page).to have_content review.movie.title
->>>>>>> master
     end
 
     scenario 'user updates a review with invalid attributes' do
@@ -57,7 +49,7 @@ So that I can correct my mistakes
   scenario 'user cannot edit reviews they did not post' do
     sign_in_as(FactoryGirl.create(:user))
     visit movie_path(review.movie)
-    within(:css, "##{review.id}") do
+    within(:css, "#review_#{review.id}") do
       expect(page).to_not have_content 'Edit'
     end
   end
