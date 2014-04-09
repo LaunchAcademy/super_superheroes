@@ -16,12 +16,12 @@ feature 'Admin deletes review', %Q{
   let!(:movie) { FactoryGirl.create(:movie) }
   let!(:user) { FactoryGirl.create(:user) }
   let!(:reviews) do
-    FactoryGirl.create_list(:review, 3, movie: movie)
-    FactoryGirl.create_list(:review, 2, movie: movie, user: user)
+    FactoryGirl.create_list(:review, 5, movie: movie)
   end
 
   context 'as admin' do
     before :each do
+      @prev_count = Review.count
       admin = FactoryGirl.create(:user, role: 'admin')
       sign_in_as(admin)
       visit movie_path(movie)
@@ -42,6 +42,7 @@ feature 'Admin deletes review', %Q{
         page.should have_button('Delete', count: movie.reviews.count)
       end
 
+      expect(Review.count).to eq(@prev_count - 1)
     end
   end
 

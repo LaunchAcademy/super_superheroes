@@ -15,16 +15,13 @@ So it’s no longer available
 
   let!(:movie) { FactoryGirl.create(:movie) }
   let!(:user) { FactoryGirl.create(:user) }
-  let!(:reviews) do
-    FactoryGirl.create_list(:review, 3, movie: movie)
-    FactoryGirl.create_list(:review, 2, movie: movie, user: user)
-  end
+  let!(:other_reviews) {FactoryGirl.create_list(:review, 3, movie: movie)}
+  let!(:user_reviews) {FactoryGirl.create_list(:review, 2, movie: movie, user: user)}
 
   scenario 'signed in user destroys a review' do
     sign_in_as(user)
     visit movie_path(movie)
-
-    within(:css, "#review_#{reviews[0].id}") do
+    within(:css, "#review_#{user_reviews[0].id}") do
       click_on 'Delete'
     end
 
@@ -33,7 +30,7 @@ So it’s no longer available
     end
 
     expect(page).to have_content 'Review successfully deleted.'
-    expect(Review.where(id: reviews[0].id)).to be_empty
+    expect(Review.where(id: user_reviews[0].id)).to be_empty
     expect(page).to have_content movie.title
   end
 
@@ -42,7 +39,7 @@ So it’s no longer available
     visit movie_path(movie)
 
     within(:css, '.reviews') do
-      page.should have_button('Delete', count: 2)
+      expect(page).to have_button('Delete', count: 2)
     end
 
   end
