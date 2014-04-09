@@ -13,42 +13,39 @@ So it’s no longer available
 # * I must be signed in to delete a review
 # * I can only delete reviews I wrote
 
-  let!(:movie) { FactoryGirl.create(:movie) }
-  let!(:user) { FactoryGirl.create(:user) }
-  let!(:other_reviews) {FactoryGirl.create_list(:review, 3, movie: movie)}
+# <<<<<<< HEAD
+#   let!(:movie) { FactoryGirl.create(:movie) }
+#   let!(:user) { FactoryGirl.create(:user) }
+#   let!(:other_reviews) {FactoryGirl.create_list(:review, 3, movie: movie)}
+#   let!(:user_reviews) {FactoryGirl.create_list(:review, 2, movie: movie, user: user)}
+
+  let!(:review) {FactoryGirl.create(:review)}
+  let!(:movie)  {review.movie}
+  let!(:user)   {review.user}
   let!(:user_reviews) {FactoryGirl.create_list(:review, 2, movie: movie, user: user)}
 
-  scenario 'signed in user destroys a review' do
+  scenario 'user destroys a review' do
     sign_in_as(user)
-    visit movie_path(movie)
-    within(:css, "#review_#{user_reviews[0].id}") do
+    visit movie_path(movie.id)
+
+    within(:css, "#review_#{review.id}") do
       click_on 'Delete'
     end
 
     within(:css, '.reviews') do
-      page.should have_button('Delete', count: 1)
+      page.should have_button('Delete', count: 2)
     end
 
     expect(page).to have_content 'Review successfully deleted.'
-    expect(Review.where(id: user_reviews[0].id)).to be_empty
+    expect(Review.where(id: review.id)).to be_empty
     expect(page).to have_content movie.title
   end
 
-  scenario 'Standard user can only see delete links on their own reviews' do
-    sign_in_as(user)
+  scenario 'user cannot destroy a review they did not post' do
+    sign_in_as(FactoryGirl.create(:user))
     visit movie_path(movie)
-
-    within(:css, '.reviews') do
-      expect(page).to have_button('Delete', count: 2)
-    end
-
-  end
-
-  scenario 'Unauthorized cannot see any delete links' do
-    visit movie_path(movie)
-
-    within(:css, '.reviews') do
-      page.should have_button('Delete', count: 0)
+    within(:css, "#review_#{review.id}") do
+      expect(page).to_not have_content 'Delete'
     end
   end
 

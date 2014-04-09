@@ -12,5 +12,6 @@ describe User do
 
   it {should have_many(:movies).dependent(:nullify)}
   it {should have_many(:reviews).dependent(:nullify)}
+  it {should have_many(:votes).dependent(:nullify)}
 
 end
