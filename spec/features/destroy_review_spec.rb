@@ -30,4 +30,12 @@ So it’s no longer available
     expect(page).to have_content movie.title
   end
 
+  scenario 'user cannot destroy a review they did not post' do
+    sign_in_as(FactoryGirl.create(:user))
+    visit movie_path(movie)
+    within(:css, "##{review.id}") do
+      expect(page).to_not have_content 'Delete'
+    end
+  end
+
 end
