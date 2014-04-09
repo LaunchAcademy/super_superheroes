@@ -17,6 +17,7 @@ So it’s no longer available
   let!(:movie) {review.movie}
 
   scenario 'user destroys a review' do
+    sign_in_as(review.user)
     visit movie_path(movie.id)
 
     within(:css, "##{review.id}") do

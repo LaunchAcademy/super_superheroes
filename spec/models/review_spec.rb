@@ -8,9 +8,11 @@ describe Review do
   it { should have_valid(:body).when(review.body, nil, "")}
 
   it { should belong_to(:movie)}
-  it {should validate_presence_of(:movie)}
+  it { should validate_presence_of(:movie)}
 
   it {should belong_to(:user)}
+
+  it {should have_many(:votes).dependent(:destroy)}
 
   describe "#net_votes" do
 
@@ -27,6 +29,10 @@ describe Review do
 
     it 'allows us to sort reviews by this amount' do
       expect(Review.all.sort_by(&:net_votes).first).to eq(@review2)
+    end
+
+    it 'returns 0 when review has no votes' do
+      expect(@review.net_votes).to eq(0)
     end
   end
 

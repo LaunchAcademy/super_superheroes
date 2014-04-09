@@ -8,7 +8,7 @@ class Review < ActiveRecord::Base
 
   belongs_to :movie
   belongs_to :user
-  has_many :votes
+  has_many :votes, dependent: :destroy
 
   validates :movie, presence: true
 

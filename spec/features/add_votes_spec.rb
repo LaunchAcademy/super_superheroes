@@ -37,7 +37,7 @@ feature 'user votes on a review', %Q{
       expect(Vote.find_by(user: @user, review: @review).value).to eq('Down')
 
       expect(page).to have_content('Success!')
-      expect(page).to have_content('1')
+      expect(page).to have_content('Down: 1')
       expect(page).to have_content('0')
     end
   end
