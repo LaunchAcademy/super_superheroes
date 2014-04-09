@@ -12,7 +12,7 @@ feature 'admin deletes a movie', %Q{
   # * When I delete a movie, its reviews and votes are also deleted
 
   let!(:movies) { FactoryGirl.create_list(:movie, 3) }
-  let!(:review) { FactoryGirl.create_list(:review, 3, movie: movies.first) }
+  let!(:reviews) { FactoryGirl.create_list(:review, 3, movie: movies.first) }
 
   context 'logged in as admin' do
     before :each do
@@ -40,11 +40,6 @@ feature 'admin deletes a movie', %Q{
 
     scenario 'Admin deletes movie from show page' do
       visit movie_path(movies[0])
-
-      within(:css, '.movie') do
-        expect(page).to have_link('Delete')
-      end
-
       click_link 'Delete'
 
       expect(current_path).to eq(movies_path)
@@ -54,7 +49,7 @@ feature 'admin deletes a movie', %Q{
   end
 
   context 'logged in as non-admin user or unauthenticated user' do
-    scenario 'visit movies page as non-admin' do
+    scenario 'a non-admin cannot delete a movie' do
       user = FactoryGirl.create(:user)
       sign_in_as(user)
       visit movies_path
