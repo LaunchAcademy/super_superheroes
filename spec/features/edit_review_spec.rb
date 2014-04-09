@@ -20,7 +20,7 @@ So that I can correct my mistakes
     before :each do
       sign_in_as(review.user)
       visit movie_path(review.movie)
-      within(:css, "##{review.id}") do
+      within(:css, "#review_#{review.id}") do
         click_link 'Edit'
       end
     end
@@ -49,7 +49,7 @@ So that I can correct my mistakes
   scenario 'user cannot edit reviews they did not post' do
     sign_in_as(FactoryGirl.create(:user))
     visit movie_path(review.movie)
-    within(:css, "##{review.id}") do
+    within(:css, "#review_#{review.id}") do
       expect(page).to_not have_content 'Edit'
     end
   end
