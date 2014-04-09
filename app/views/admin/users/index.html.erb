@@ -1,0 +1,49 @@
+<h1>Welcome Admin!</h1>
+
+<div class="users">
+  <!-- Header rows -->
+  <div class="row">
+    <div class="small-2 columns">
+      Username
+    </div>
+    <div class="small-3 columns">
+      Email
+    </div>
+    <div class="small-1 columns">
+      Review Count
+    </div>
+    <div class="small-3 columns">
+      Last Sign In
+    </div>
+    <div class="small-1 columns">
+      Sign In Count
+    </div>
+    <div class="small-2 columns">
+      Delete?
+    </div>
+  </div>
+
+  <!-- User information -->
+  <% @users.each do |user| %>
+    <div class=<%= "row user_#{user.id}" %>>
+      <div class="small-2 columns">
+        <%= user.username %>
+      </div>
+      <div class="small-3 columns">
+        <%= user.email %>
+      </div>
+      <div class="small-1 columns">
+        <%= user.reviews.count %>
+      </div>
+      <div class="small-3 columns">
+        <%= user.last_sign_in_at %>
+      </div>
+      <div class="small-1 columns">
+        <%= user.sign_in_count %>
+      </div>
+      <div class="small-2 columns">
+        <%= link_to 'Delete', admin_user_path(user), method: :delete %>
+      </div>
+    </div>
+  <% end %>
+</div>
