@@ -1,9 +1,11 @@
 class ReviewsController < ApplicationController
 
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
 
   def index
     @movie = Movie.find(params[:movie_id])
+    @reviews = @movie.reviews.sort_by(&:net_votes).reverse!
+
     redirect_to movie_path(@movie)
   end
 
@@ -32,7 +34,7 @@ class ReviewsController < ApplicationController
   def update
     @movie = Movie.find(params[:movie_id])
     @review = Review.find(params[:id])
-    if @review.update(review_params)
+    if @review.update(review_params) && current_user == @review.user
       flash[:notice] = 'Success! Your review was saved.'
       redirect_to movie_path(@movie)
     else
@@ -51,7 +53,7 @@ class ReviewsController < ApplicationController
       flash[:notice] = 'Review could not be deleted.'
     end
 
-      redirect_to movie_path(@movie)
+    redirect_to movie_path(@movie)
   end
 
   private
