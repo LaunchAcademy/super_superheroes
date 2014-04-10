@@ -8,5 +8,28 @@ class Review < ActiveRecord::Base
 
   belongs_to :movie
   belongs_to :user
+  has_many :votes, dependent: :destroy
+
+  validates :movie, presence: true
+
+  def net_votes
+    @net_votes ||= calculate_votes
+  end
+
+  def up_votes_count
+    votes.where(value: "Up").count
+  end
+
+  def down_votes_count
+    votes.where(value: "Down").count
+  end
+
+  def calculate_votes
+    if self.votes.count == 0
+      0
+    else
+      up_votes_count - down_votes_count
+    end
+  end
 
 end

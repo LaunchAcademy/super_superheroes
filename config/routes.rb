@@ -8,6 +8,8 @@ SuperHeroes::Application.routes.draw do
     resources :users
   end
 
+  resources :votes, only: [:update, :create]
+
   devise_for :users
   root to: "welcome#index"
 
