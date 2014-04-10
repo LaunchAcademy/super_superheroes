@@ -4,6 +4,10 @@ SuperHeroes::Application.routes.draw do
     resources :reviews
   end
 
+  namespace :admin do
+    resources :users
+  end
+
   resources :votes, only: [:update, :create]
 
   devise_for :users
