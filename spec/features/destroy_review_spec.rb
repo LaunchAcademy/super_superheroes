@@ -13,12 +13,6 @@ So it’s no longer available
 # * I must be signed in to delete a review
 # * I can only delete reviews I wrote
 
-# <<<<<<< HEAD
-#   let!(:movie) { FactoryGirl.create(:movie) }
-#   let!(:user) { FactoryGirl.create(:user) }
-#   let!(:other_reviews) {FactoryGirl.create_list(:review, 3, movie: movie)}
-#   let!(:user_reviews) {FactoryGirl.create_list(:review, 2, movie: movie, user: user)}
-
   let!(:review) {FactoryGirl.create(:review)}
   let!(:movie)  {review.movie}
   let!(:user)   {review.user}
