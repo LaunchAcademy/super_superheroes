@@ -11,7 +11,7 @@ describe User do
   it {should_not have_valid(:email).when('', nil, 'john', 'john@igoogle', 'usercom')}
 
   it {should have_many(:movies).dependent(:nullify)}
-  it {should have_many(:reviews).dependent(:nullify)}
+  it {should have_many(:reviews).dependent(:nullify).with_foreign_key('author_id')}
   it {should have_many(:votes).dependent(:nullify)}
 
 end

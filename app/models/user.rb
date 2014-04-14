@@ -7,5 +7,5 @@ class User < ActiveRecord::Base
   has_many :votes, dependent: :nullify
   validates :username, presence: true, uniqueness: true
   has_many :movies, dependent: :nullify
-  has_many :reviews, dependent: :nullify
+  has_many :reviews, foreign_key: :author_id, dependent: :nullify
 end
