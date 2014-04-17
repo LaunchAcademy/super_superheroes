@@ -3,7 +3,7 @@ class MoviesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    @movies = Movie.all
+    @movies = Movie.all.page(params[:page])
   end
 
   def new
@@ -24,7 +24,7 @@ class MoviesController < ApplicationController
   def show
     @movie = Movie.find(params[:id])
     @reviews = @movie.reviews.sort_by(&:net_votes).reverse!
-
+    @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
   end
 
   def destroy

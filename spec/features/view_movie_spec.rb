@@ -11,7 +11,7 @@ feature 'view the page for a single movie', %Q{
   let!(:movie) { FactoryGirl.create(:movie) }
 
   scenario 'visiting a movie page' do
-    FactoryGirl.create_list(:review, 3, movie: movie, rating: rand(5))
+    FactoryGirl.create_list(:review, 30, movie: movie, rating: rand(5))
 
     visit movie_path(movie)
 
@@ -24,7 +24,14 @@ feature 'view the page for a single movie', %Q{
     expect(page).to have_content movie.average_rating
     expect(page).to have_content 'Add Review'
 
-    movie.reviews.each do |r|
+    movie.reviews[0..9].each do |r|
+      expect(page).to have_content r.rating
+      expect(page).to have_content r.body
+    end
+
+    click_on 'Next ›'
+
+    movie.reviews[10..19].each do |r|
       expect(page).to have_content r.rating
       expect(page).to have_content r.body
     end

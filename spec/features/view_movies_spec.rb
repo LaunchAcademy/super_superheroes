@@ -9,10 +9,17 @@ feature 'view a list of all movies', %Q{
 } do
 
   scenario 'visiting movie index' do
-    FactoryGirl.create_list(:movie, 3)
+    FactoryGirl.create_list(:movie, 50)
     visit '/movies'
 
-    Movie.all.each do |movie|
+    Movie.first(10).each do |movie|
+      expect(page).to have_content(movie.title)
+      expect(page).to have_content(movie.year)
+    end
+
+    click_on 'Last »'
+
+    Movie.last(10).each do |movie|
       expect(page).to have_content(movie.title)
       expect(page).to have_content(movie.year)
     end

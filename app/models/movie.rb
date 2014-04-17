@@ -9,6 +9,8 @@ class Movie < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   belongs_to :user
 
+  paginates_per 10
+
   def average_rating
     if reviews.count > 0
       ratings = reviews.pluck(:rating)
