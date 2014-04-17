@@ -10,7 +10,7 @@ feature 'admin manages users', %q{
   # * I can see all users
   # * I can see user’s username, email, and their review count
 
-  let!(:users) {FactoryGirl.create_list(:user, 10)}
+  let!(:users) {FactoryGirl.create_list(:user, 50)}
 
   context 'Sign in as admin' do
     before :each do
@@ -23,7 +23,13 @@ feature 'admin manages users', %q{
       expect(page).to have_content("Welcome Admin!")
 
       within(:css, '.users') do
-        expect(page).to have_selector('div.row', count: User.count + 1)
+        expect(page).to have_selector('div.row', count: 11)
+      end
+
+      click_on 'Next ›'
+
+      within(:css, '.users') do
+        expect(page).to have_selector('div.row', count: 11)
       end
     end
   end
