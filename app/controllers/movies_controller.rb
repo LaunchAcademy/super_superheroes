@@ -3,7 +3,7 @@ class MoviesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    @movies = Movie.all
+    @movies = Movie.all.page(params[:page])
   end
 
   def new
