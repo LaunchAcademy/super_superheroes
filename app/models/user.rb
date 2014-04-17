@@ -8,4 +8,6 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true
   has_many :movies, dependent: :nullify
   has_many :reviews, foreign_key: :author_id, dependent: :nullify
+
+  mount_uploader :profile_photo, ProfilePhotoUploader
 end

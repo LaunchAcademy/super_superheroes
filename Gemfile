@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'simple_form'
 gem 'devise'
+gem 'carrierwave'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -38,14 +39,14 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'launchy'  
+  gem 'launchy'
   gem 'valid_attribute'
   gem 'shoulda'
   gem 'factory_girl_rails'
   gem 'pry-rails'
   gem 'dotenv-rails'
 end
- 
+
 group :development do
   gem 'quiet_assets'
   gem 'better_errors'
