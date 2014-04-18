@@ -4,27 +4,61 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Super Superheroes" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
+    <link href='http://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
   </head>
 
-  <body>
+  <body class="bg">
 
-    <% if user_signed_in? %>
-      <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
-      <%= link_to 'Edit Profile', edit_user_registration_path %>
-    <% else %>
-      <%=link_to 'Sign up', new_user_registration_path %>
-      <%=link_to 'Sign in', new_user_session_path %>
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1><%= link_to 'Super Superheroes', root_path %></h1>
+        </li>
+      </ul>
+
+      <section class="top-bar-section">
+        <ul class="left">
+          <li><%= link_to "Movies", movies_path %></li>
+          <% if user_signed_in? %>
+            <li><%= link_to 'Add Movie', new_movie_path %></li>
+          <% end %>
+        </ul>
+        <ul class="right">
+          <% if user_signed_in? %>
+            <li class="has-dropdown">
+              <%= link_to current_user.username, "#" %>
+              <ul class="dropdown">
+                <li><%= link_to 'Edit Account', edit_user_registration_path %></li>
+                <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+              </ul>
+            </li>
+          <% else %>
+            <li><%=link_to 'Sign In', new_user_session_path %></li>
+            <li class='active'><%=link_to 'Sign Up', new_user_registration_path %></li>
+          <% end %>
+        </ul>
+      </section>
+    </nav>
+
+    <% flash.each do |name, msg| %>
+      <% if msg.is_a?(String) %>
+        <div data-alert class="alert-box <%= name.to_s == 'notice' ? 'success' : 'alert' %>">
+          <%= content_tag :div, msg %>
+          <a href="#" class="close">&times;</a>
+        </div>
+      <% end %>
     <% end %>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
-    <%= yield %>
+    <div class="row super">
+      <div class="small-10 columns small-centered">
+        <%= yield %>
+      </div>
+    </div>
 
     <%= javascript_include_tag "application" %>
   </body>

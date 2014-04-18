@@ -1,0 +1,19 @@
+@import "foundation_and_overrides";
+
+.bg {
+  background-image: url('super_bg.png');
+  background-size: auto 110%;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-attachment: fixed;
+}
+
+.comic-title {
+  font-family: 'Bangers', cursive;
+  font-size: 4em;
+}
+
+.super {
+  background-color: rgba(232,232,232,0.8);
+  height: 100%;
+}
