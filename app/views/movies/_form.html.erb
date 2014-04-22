@@ -5,6 +5,24 @@
   <%= f.input :mpaa_rating, label: 'MPAA rating' %>
   <%= f.input :director %>
   <%= f.input :synopsis %>
-
   <%= f.button :submit, 'Add Movie' %>
 <% end %>
+
+<h1>OR</h1>
+<h2>Find Movie From Rotten Tomatoes</h2>
+
+<%= form_tag("/movies/search", method: 'get') do %>
+  <%= label_tag(:q, "Find Movie") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+
+
+<%# if !@titles.nil %>
+<%#= f.select :title, @response.map { |movie| [movie.title, movie.id] }
+
+
+<#%= f.select :role, Role.all.map { |r| [r.name, r.id, { class: r.company.id }] }, include_blank: true %>
+
+<%#s= f.input :source_type, :label => "Lead or VTeam", :collection => ["lead","vteam"], :selected => "lead" %>
