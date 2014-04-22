@@ -10,4 +10,5 @@ class User < ActiveRecord::Base
   has_many :reviews, foreign_key: :author_id, dependent: :nullify
 
   paginates_per 10
+  mount_uploader :profile_photo, ProfilePhotoUploader
 end

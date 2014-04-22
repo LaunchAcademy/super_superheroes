@@ -12,6 +12,11 @@
     <%= f.input :password_confirmation, required: true %>
   </div>
 
+  <div>
+    <%= f.label :profile_photo, "Profile Picture" %>
+    <%= f.file_field :profile_photo %>
+  </div>
+
   <div class="form-actions">
     <%= f.button :submit, "Sign up" %>
   </div>
