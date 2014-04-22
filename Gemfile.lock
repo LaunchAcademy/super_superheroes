@@ -65,6 +65,9 @@ GEM
     dotenv (0.10.0)
     dotenv-rails (0.10.0)
       dotenv (= 0.10.0)
+    email_spec (1.5.0)
+      launchy (~> 2.1)
+      mail (~> 2.2)
     erubis (2.7.0)
     excon (0.33.0)
     execjs (2.0.2)
@@ -223,6 +226,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   dotenv-rails
+  email_spec
   factory_girl_rails
   fog
   jbuilder (~> 1.2)
