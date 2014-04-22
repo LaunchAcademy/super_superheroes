@@ -21,52 +21,19 @@
       </div>
       <div class="small-6 columns text-right super-nav-right" data-equalizer-watch>
         <% if user_signed_in? %>
-          <%= link_to 'Edit Account', edit_user_registration_path %> |
-          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %><br>
-        <% else %>
-          <%=link_to 'Sign In', new_user_session_path %> |
-          <%=link_to 'Sign Up', new_user_registration_path %><br>
+          <%= link_to 'Add Movie', new_movie_path, class: "button alert tiny" %>
         <% end %>
 
+        <%= link_to "Movies", movies_path, class: "button alert tiny" %>
         <% if user_signed_in? %>
-          <%= link_to 'Add Movie', new_movie_path %> |
+          <%= link_to 'Edit Account', edit_user_registration_path, class: "button success tiny" %>
+          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "button success tiny" %>
+        <% else %>
+          <%=link_to 'Sign In', new_user_session_path, class: "button success" %>
+          <%=link_to 'Sign Up', new_user_registration_path %>
         <% end %>
-
-        <%= link_to "Movies", movies_path %>
       </div>
     </div>
-
-    <!-- <div class="contain-to-grid">
-      <nav class="top-bar" data-topbar>
-        <ul class="title-area">
-            <li>
-              <h1><%= link_to image_tag('logo.png'), root_path %></h1>
-            </li>
-        </ul>
-
-        <section class="top-bar-section">
-          <ul class="right">
-            <% if user_signed_in? %>
-              <li><%= link_to 'Add Movie', new_movie_path %></li>
-            <% end %>
-            <li><%= link_to "Movies", movies_path %></li>
-
-            <% if user_signed_in? %>
-              <li class="has-dropdown">
-                <%= link_to current_user.username, "#" %>
-                <ul class="dropdown">
-                  <li><%= link_to 'Edit Account', edit_user_registration_path %></li>
-                  <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-                </ul>
-              </li>
-            <% else %>
-              <li><%=link_to 'Sign In', new_user_session_path %></li>
-              <li class='active'><%=link_to 'Sign Up', new_user_registration_path %></li>
-            <% end %>
-          </ul>
-        </section>
-      </nav>
-    </div> -->
 
     <div class="row super">
       <% flash.each do |name, msg| %>

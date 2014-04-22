@@ -1,3 +1,29 @@
 <div class="row">
-  <h1>Welcome!</h1>
+  <h1 class="comic-title">Welcome!</h1>
+</div>
+
+<div class="row">
+  <div class="small-6 columns">
+  <%= image_tag('green_lantern.png') %>
+  </div>
+
+  <div class="small-6 columns">
+    <p>Have you ever wanted to review a movie? But not just any movie! A superhero movie!! But didn't want to share your valuable insights on lowly review websites like IMDB? Well rest assured, you don't have to!</p>
+    <p>Leggings Tonx hella readymade disrupt. Post-ironic Helvetica sartorial organic selvage, selfies brunch dreamcatcher. Fanny pack Williamsburg polaroid fashion axe chambray, seitan gluten-free kitsch +1 salvia YOLO. Etsy shabby chic retro fanny pack, Truffaut Cosby sweater slow-carb typewriter twee bicycle rights Brooklyn hashtag Vice flannel. Flexitarian Pinterest master cleanse Bushwick fashion axe, sartorial four loko. Gentrify banh mi umami brunch, Carles butcher ethnic Banksy fap Vice cliche forage Pinterest. +1 McSweeney's ugh, chillwave sustainable asymmetrical Pitchfork banjo Williamsburg.</p>
+  </div>
+</div>
+
+<div class="row">
+  <h1 class="comic-title">Recent Reviews</h1>
+
+  <table class="reviews">
+    <tbody>
+      <% @reviews.each do |review| %>
+        <tr>
+          <td><%= link_to review.movie.title, movie_path(review.movie) %></td>
+          <td><%= truncate(review.body, length: 250) %></td>
+        </tr>
+      <% end %>
+    </tobdy>
+  </table>
 </div>
