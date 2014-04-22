@@ -94,6 +94,9 @@ GEM
     fog-json (1.0.0)
       multi_json (~> 1.0)
     formatador (0.2.4)
+    foundation-rails (5.2.1.0)
+      railties (>= 3.1.0)
+      sass (>= 3.2.0)
     hike (1.2.3)
     i18n (0.6.9)
     jbuilder (1.5.3)
@@ -203,8 +206,11 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
+<<<<<<< HEAD
     turbolinks (2.2.2)
       coffee-rails
+=======
+>>>>>>> 9ee27e750a75171253ea5aee9fcb5d5df5d692ef
     tzinfo (0.3.39)
     uglifier (2.5.0)
       execjs (>= 0.3.0)
@@ -228,7 +234,11 @@ DEPENDENCIES
   dotenv-rails
   email_spec
   factory_girl_rails
+<<<<<<< HEAD
   fog
+=======
+  foundation-rails
+>>>>>>> 9ee27e750a75171253ea5aee9fcb5d5df5d692ef
   jbuilder (~> 1.2)
   jquery-rails
   kaminari
@@ -243,6 +253,5 @@ DEPENDENCIES
   sdoc
   shoulda
   simple_form
-  turbolinks
   uglifier (>= 1.3.0)
   valid_attribute

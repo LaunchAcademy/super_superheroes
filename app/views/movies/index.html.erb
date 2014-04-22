@@ -1,6 +1,10 @@
-<h1>Movies</h1>
+<h1 class="comic-title">Movies</h1>
 
-<table border="1">
+<% if user_signed_in? %>
+  <%= link_to "Add", new_movie_path, class: "button" %>
+<% end %>
+
+<table>
   <thead>
     <th>Title</th>
     <th>Year</th>
@@ -17,7 +21,7 @@
     <% @movies.each do |movie| %>
       <tr id=<%= "movie_#{movie.id}" %>>
         <td>
-          <%= movie.title %>
+          <%= link_to movie.title, movie_path(movie) %>
         </td>
         <td>
           <%= movie.year %>
@@ -32,7 +36,10 @@
           <%= movie.director %>
         </td>
         <td>
-          <%= movie.synopsis %>
+          <% if movie.synopsis != "" %>
+            <%= truncate(movie.synopsis, length: 150) %>
+            <%= link_to "read more", movie_path(movie) %>
+          <% end %>
         </td>
         <% if admin? %>
           <td>
