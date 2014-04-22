@@ -27,10 +27,10 @@
   <% @users.each do |user| %>
     <div class="row" id=<%= "user_#{user.id}" %>>
       <div class="small-2 columns">
-        <%= user.username %>
+        <%= link_to user.username, users_path(user) %>
       </div>
       <div class="small-3 columns">
-        <%= user.email %>
+        <%= link_to user.email, "mailto:#{user.email}" %>
       </div>
       <div class="small-1 columns">
         <%= user.reviews.count %>

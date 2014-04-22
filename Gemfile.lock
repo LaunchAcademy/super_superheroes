@@ -206,11 +206,8 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-<<<<<<< HEAD
     turbolinks (2.2.2)
       coffee-rails
-=======
->>>>>>> 9ee27e750a75171253ea5aee9fcb5d5df5d692ef
     tzinfo (0.3.39)
     uglifier (2.5.0)
       execjs (>= 0.3.0)
@@ -234,11 +231,8 @@ DEPENDENCIES
   dotenv-rails
   email_spec
   factory_girl_rails
-<<<<<<< HEAD
   fog
-=======
   foundation-rails
->>>>>>> 9ee27e750a75171253ea5aee9fcb5d5df5d692ef
   jbuilder (~> 1.2)
   jquery-rails
   kaminari
