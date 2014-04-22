@@ -14,6 +14,8 @@ class Review < ActiveRecord::Base
 
   validates :movie, presence: true
 
+  # paginates_per 10
+
   def net_votes
     @net_votes ||= calculate_votes
   end
