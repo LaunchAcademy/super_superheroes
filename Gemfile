@@ -30,6 +30,9 @@ gem 'jbuilder', '~> 1.2'
 gem 'simple_form'
 gem 'devise'
 gem 'kaminari'
+gem 'carrierwave'
+gem 'fog'
+gem 'dotenv-rails'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -44,7 +47,6 @@ group :development, :test do
   gem 'shoulda'
   gem 'factory_girl_rails'
   gem 'pry-rails'
-  gem 'dotenv-rails'
   gem 'email_spec'
 end
 
