@@ -27,7 +27,7 @@ So it’s no longer available
     end
 
     within(:css, '.reviews') do
-      page.should have_button('Delete', count: 2)
+      page.should have_link('Delete', count: 2)
     end
 
     expect(page).to have_content 'Review successfully deleted.'

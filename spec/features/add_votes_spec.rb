@@ -37,7 +37,7 @@ feature 'user votes on a review', %Q{
       expect(Vote.find_by(user: @user, review: @review).value).to eq('Down')
 
       expect(page).to have_content('Success!')
-      expect(page).to have_content('Down: 1')
+      expect(page).to have_content('Down (1)')
       expect(page).to have_content('0')
     end
   end
@@ -46,9 +46,7 @@ feature 'user votes on a review', %Q{
     @movie = FactoryGirl.create(:movie)
     @review = FactoryGirl.create(:review, movie: @movie)
     visit movie_path(@movie)
-    expect(page).to_not have_button 'Down'
-    expect(page).to_not have_button 'Up'
-    expect(page).to have_content 'Up: 0'
+    expect(page).to have_content 'Up (0)'
   end
 
 end

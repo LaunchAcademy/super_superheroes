@@ -35,7 +35,8 @@ So that everyone can review it
       fill_in 'MPAA rating', with: movie.mpaa_rating
       fill_in 'Director', with: movie.director
       fill_in 'Synopsis', with: movie.synopsis
-      click_on 'Add Movie'
+
+      within(:css, '.new_movie') { click_on 'Add Movie' }
 
       expect(Movie.last.user).to eq(@user)
       expect(page).to have_content 'Success!'
@@ -43,7 +44,7 @@ So that everyone can review it
     end
 
     scenario 'user adds movie with invalid attributes' do
-      click_on 'Add Movie'
+      within(:css, '.new_movie') { click_on 'Add Movie' }
 
       expect(page).to have_content 'Movie could not be saved'
       expect(page).to have_content 'Add a Movie'
@@ -67,7 +68,7 @@ So that everyone can review it
       fill_in 'Year', with: movie.year
       fill_in 'Superhero', with: "Spiderman"
 
-      click_on 'Add Movie'
+      within(:css, '.new_movie') { click_on 'Add Movie' }
 
       expect(page).to have_content 'Movie could not be saved'
       expect(page).to have_content 'Add a Movie'
@@ -84,7 +85,7 @@ So that everyone can review it
       fill_in 'Year', with: "1998"
       fill_in 'Superhero', with: movie.superhero
 
-      click_on 'Add Movie'
+      within(:css, '.new_movie') { click_on 'Add Movie' }
 
       expect(Movie.last.user).to eq(@user)
       expect(page).to have_content 'Success!'
@@ -96,7 +97,8 @@ So that everyone can review it
     scenario 'unathorized user cannot add movies' do
       visit new_movie_path
 
-      expect(page).to have_content('Sign up Sign in You need to sign in or sign up before continuing.')
+      expect(page).to have_content('You need to sign in or sign up before continuing.')
+      expect(page).to have_content('Sign In')
       expect(current_path).to eq(new_user_session_path)
     end
   end

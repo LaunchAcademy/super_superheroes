@@ -26,6 +26,7 @@ So that other people can read my review
     end
 
     scenario 'user adds a review' do
+      ActionMailer::Base.deliveries = []
       select(review.rating, from: 'Rating')
       fill_in 'Review', with: review.body
       click_on 'Finish Review'
@@ -33,14 +34,27 @@ So that other people can read my review
       expect(page).to have_content 'Success!'
       expect(page).to have_content review.body
       expect(movie.reviews.count).to eq(review_count + 1)
+
+      expect(ActionMailer::Base.deliveries.size).to eq(1)
+      last_email = ActionMailer::Base.deliveries.last
+      expect(last_email).to have_subject("Someone posted a review of #{movie.title}")
+      expect(last_email).to deliver_to(movie.user.email)
+      expect(last_email).to have_body_text movie.title
     end
 
     scenario 'user adds a review with no text' do
+      ActionMailer::Base.deliveries = []
       select(review.rating, from: 'Rating')
       click_on 'Finish Review'
 
       expect(page).to have_content 'Success!'
       expect(movie.reviews.count).to eq(review_count + 1)
+
+      expect(ActionMailer::Base.deliveries.size).to eq(1)
+      last_email = ActionMailer::Base.deliveries.last
+      expect(last_email).to have_subject("Someone posted a review of #{movie.title}")
+      expect(last_email).to deliver_to(movie.user.email)
+      expect(last_email).to have_body_text movie.title
     end
 
     scenario 'user adds a review with no score' do
