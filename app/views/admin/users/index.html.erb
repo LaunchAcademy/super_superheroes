@@ -27,7 +27,7 @@
   <% @users.each do |user| %>
     <div class="row" id=<%= "user_#{user.id}" %>>
       <div class="small-2 columns">
-        <%= link_to user.username, users_path(user) %>
+        <%= user.username %>
       </div>
       <div class="small-3 columns">
         <%= link_to user.email, "mailto:#{user.email}" %>
