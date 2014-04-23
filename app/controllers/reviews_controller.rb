@@ -17,6 +17,7 @@ class ReviewsController < ApplicationController
     @review = @movie.reviews.new(review_params)
     if @review.save
       flash[:notice] = 'Success! Your review was saved.'
+      NewReviewAdded.receipt(@review).deliver
       redirect_to movie_path(@movie)
     else
       flash[:notice] = 'Review could not be saved.'

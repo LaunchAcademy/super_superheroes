@@ -13,6 +13,9 @@ gem 'simple_form'
 gem 'devise'
 gem 'kaminari'
 gem 'foundation-rails'
+gem 'carrierwave'
+gem 'fog'
+gem 'dotenv-rails'
 
 group :doc do
   gem 'sdoc', require: false
@@ -26,7 +29,7 @@ group :development, :test do
   gem 'shoulda'
   gem 'factory_girl_rails'
   gem 'pry-rails'
-  gem 'dotenv-rails'
+  gem 'email_spec'
 end
 
 group :development do
