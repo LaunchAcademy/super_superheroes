@@ -1,0 +1,33 @@
+@import "foundation_and_overrides";
+
+.bg {
+  background-image: url('super_bg.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-attachment: fixed;
+}
+
+.comic-title {
+  font-family: 'Bangers', cursive;
+  font-size: 4em;
+}
+
+.super-nav {
+  background-color: rgba(250,250,250,0.8);
+  border-bottom: 1px solid #000000;
+}
+
+.super-nav-right {
+  padding-top: 20px;
+}
+
+.super-nav-right a {
+  font-family: 'Sniglet', cursive;
+  font-size: 1.2em;
+}
+
+.super {
+  background-color: rgba(250,250,250,0.8);
+  min-height: 100%;
+}

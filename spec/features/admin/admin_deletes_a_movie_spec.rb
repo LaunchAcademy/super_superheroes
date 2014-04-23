@@ -40,7 +40,7 @@ feature 'admin deletes a movie', %Q{
 
     scenario 'Admin deletes movie from show page' do
       visit movie_path(movies[0])
-      click_link 'Delete'
+      within(:css, '.movie') { click_link 'Delete' }
 
       expect(current_path).to eq(movies_path)
       expect(Movie.count).to eq(movies.count - 1)

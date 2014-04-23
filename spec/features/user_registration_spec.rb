@@ -21,7 +21,7 @@ feature 'user registers for a new account', %q{
     prev_count = User.count
     user = FactoryGirl.build(:user)
     visit root_path
-    click_on 'Sign up'
+    click_on 'Sign Up'
     fill_in 'Username', with: user.username
     fill_in 'Email', with: user.email
     fill_in 'user_password', with: user.password

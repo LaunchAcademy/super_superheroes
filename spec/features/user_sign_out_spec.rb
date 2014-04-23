@@ -13,11 +13,11 @@ feature 'user signs out', %q{
   scenario 'user signs out successfully' do
     sign_in_as(FactoryGirl.create(:user))
 
-    click_link 'Sign out'
+    click_on 'Sign Out'
 
-    expect(page).to have_content('Sign up')
-    expect(page).to have_content('Sign in')
-    expect(page).to_not have_content('Sign out')
+    expect(page).to have_content('Sign Up')
+    expect(page).to have_content('Sign In')
+    expect(page).to_not have_content('Sign Out')
     expect(page).to have_content('Signed out successfully.')
   end
 
