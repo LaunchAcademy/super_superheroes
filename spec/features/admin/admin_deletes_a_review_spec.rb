@@ -29,17 +29,17 @@ feature 'Admin deletes review', %Q{
 
     scenario 'Admin can see all delete links' do
       within(:css, '.reviews') do
-        page.should have_button('Delete', count: movie.reviews.count)
+        page.should have_link('Delete', count: movie.reviews.count)
       end
     end
 
     scenario 'Admin can delete a review' do
       within(:css, "#review_#{reviews[0].id}") do
-        click_button 'Delete'
+        click_link 'Delete'
       end
 
       within(:css, '.reviews') do
-        page.should have_button('Delete', count: movie.reviews.count)
+        page.should have_link('Delete', count: movie.reviews.count)
       end
 
       expect(Review.count).to eq(@prev_count - 1)

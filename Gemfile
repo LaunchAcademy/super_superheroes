@@ -12,10 +12,10 @@ gem 'jbuilder', '~> 1.2'
 gem 'simple_form'
 gem 'devise'
 gem 'kaminari'
+gem 'foundation-rails'
 gem 'carrierwave'
 gem 'fog'
 gem 'dotenv-rails'
-gem 'foundation-rails'
 
 group :doc do
   gem 'sdoc', require: false

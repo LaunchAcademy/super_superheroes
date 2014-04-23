@@ -23,8 +23,8 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
-    @reviews = @movie.reviews.sort_by(&:net_votes).reverse!
-    @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
+    @reviews = Kaminari.paginate_array(@movie.reviews.sort_by(&:net_votes).reverse!).page(params[:page]).per(10)
+    # @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
   end
 
   def destroy
