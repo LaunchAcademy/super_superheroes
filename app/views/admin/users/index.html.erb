@@ -30,7 +30,7 @@
         <%= user.username %>
       </div>
       <div class="small-3 columns">
-        <%= user.email %>
+        <%= link_to user.email, "mailto:#{user.email}" %>
       </div>
       <div class="small-1 columns">
         <%= user.reviews.count %>
