@@ -1,5 +1,7 @@
 SuperHeroes::Application.routes.draw do
 
+  get "/movies/search" => "movies#search"
+
   resources :movies do
     resources :reviews
   end
