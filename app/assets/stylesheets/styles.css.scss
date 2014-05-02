@@ -1,7 +1,7 @@
 @import "foundation_and_overrides";
 
 .bg {
-  background-image: url('super_bg.jpg');
+  background-image: url(image-path('super_bg.jpg'));
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: top center;
